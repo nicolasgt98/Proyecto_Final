@@ -1,0 +1,73 @@
+{% extends "recordatorios/home.html" %}
+
+{% block titulo %}
+<h1 class="mb-5">Tareas</h1>
+{% endblock titulo %}
+
+
+{% block contenido %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="200"><h2>Tareas</h2></th>
+            <th>
+                <a
+                href =""
+                class="btn btn-primary btn-sm"
+                ><i class ="fa fa-plus fa-lg" title ="Crear"></i>
+                </a>
+            </th>
+            <th>
+                <a
+                href ="{% url 'buscarTareas' %}"
+                class="btn btn-primary btn-sm"
+                ><i class="fa-solid fa-magnifying-glass" title ="Buscar"></i>
+                </a>
+            </th>
+        </tr>   
+</table> 
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha límite</th>
+            <th>Recordatorio</th>
+            <th>Etiqueta</th>
+            <th>Descripción</th>
+        </tr>   
+    </thead>
+    <tbody>
+    {% for t in tarea_list %}
+        <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.nombre }}</td>
+            <td>{{ t.fecha_limite }}</td>
+            <td>{{ t.recordatorio }}</td>
+            <td>{{ t.etiqueta }}</td>
+            <td>{{ t.descripcion }}</td>
+
+            
+            <td>
+                <a
+                  href=""
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href=""
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>                
+            </td>   
+
+        </tr>
+    {% endfor%}
+    </tbody>
+</table>
+
+{% endblock contenido %}
