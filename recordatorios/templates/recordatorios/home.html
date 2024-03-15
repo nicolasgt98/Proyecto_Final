@@ -72,74 +72,83 @@
         <!--Inicio Barra de navegación-->
         <nav class="navbar navbar-light bg-teal static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Cerrar Cesión</a>
+                    <p>[{{user.username}}]</p>
+                {% else %}
+                    <a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a>
+                {% endif %}
+
             </div>
         </nav>
         <!--Final Barra de navegación-->
 
         {% block contenido %}
 
-        <!--Inicio Párrafo Introductorio-->
-        <section id="introduccion" class="text-center">
-            <div class="container mt-3">
-                <h3>Aplicación web para recordatorios</h3>
-                <p>¡Bienvenido a ReminderMate! Tu aliado en la gestión del tiempo. Olvídate de perder plazos importantes
-                o citas cruciales. Con ReminderMate, organiza tu vida de manera simple y eficiente.</p>
-            </div>
-        </section>
-        <!--Final Párrafo Introductorio-->
-
-        
-        <!--Inicio Contenido-->
-        <section id="contenido">
-            <div class="container text-center mt-5">
-                <div class="row justify-content-center"> 
-                    <div class="col">
-                        <div class="d-flex justify-content-center"> 
-                            <div class="card bg-lightblue border-0" style="width: 12rem;">
-                                <img src="{%static 'assets/tarea.png' %}" class="card-img-top" alt="Tareas-Imagen">
-                                <div class="card-body">
-                                    <h3 class="card-title">Tareas</h3>
-                                    <a href="{% url 'tareas' %}" class="btn btn-custom bg-lightblue">Ir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
-                            <div class="card bg-lightblue border-0" style="width: 12rem;">
-                                <img src="{%static 'assets/evento.png' %}" class="card-img-top" alt="Eventos-Imagen">
-                                <div class="card-body">
-                                    <h3 class="card-title">Eventos</h3>
-                                    <a href="{% url 'eventos' %}" class="btn btn-custom bg-lightblue">Ir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
-                            <div class="card bg-lightblue border-0" style="width: 12rem;">
-                                <img src="{%static 'assets/pago.png' %}" class="card-img-top" alt="Pagos-Imagen">
-                                <div class="card-body">
-                                    <h3 class="card-title">Pagos</h3>
-                                    <a href="{% url 'pagos' %}" class="btn btn-custom bg-lightblue">Ir</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!--Inicio Párrafo Introductorio-->
+            <section id="introduccion" class="text-center">
+                <div class="container mt-3">
+                    <h3>Aplicación web para recordatorios</h3>
+                    <p>¡Bienvenido a ReminderMate! Tu aliado en la gestión del tiempo. Olvídate de perder plazos importantes
+                    o citas cruciales. Con ReminderMate, organiza tu vida de manera simple y eficiente.</p>
                 </div>
-            </div>
-            <div class="container mt-5">
-                <!--Inicio Sección Recordatorios-->
-                <h1>Recordatorios</h1>
-                <h3>Próximamente...</h3>
-                <p>Acá se podrán visualizar todos los recordatorios creados</p>
-                <!--Final Sección Recordatorios-->
-            </div>
-        </section>
-        <!--Final Contenido-->
+            </section>
+            <!--Final Párrafo Introductorio-->
 
+            {% if user.is_authenticated %}
+    
+                <!--Inicio Contenido-->
+                <section id="contenido">
+                    <div class="container text-center mt-5">
+                        <div class="row justify-content-center"> 
+                            <div class="col">
+                                <div class="d-flex justify-content-center"> 
+                                    <div class="card bg-lightblue border-0" style="width: 12rem;">
+                                        <img src="{%static 'assets/tarea.png' %}" class="card-img-top" alt="Tareas-Imagen">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Tareas</h3>
+                                            <a href="{% url 'tareas' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
+                                    <div class="card bg-lightblue border-0" style="width: 12rem;">
+                                        <img src="{%static 'assets/evento.png' %}" class="card-img-top" alt="Eventos-Imagen">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Eventos</h3>
+                                            <a href="{% url 'eventos' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
+                                    <div class="card bg-lightblue border-0" style="width: 12rem;">
+                                        <img src="{%static 'assets/pago.png' %}" class="card-img-top" alt="Pagos-Imagen">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Pagos</h3>
+                                            <a href="{% url 'pagos' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container mt-5">
+                        <!--Inicio Sección Recordatorios-->
+                        <h1>Recordatorios</h1>
+                        <h3>Próximamente...</h3>
+                        <p>Acá se podrán visualizar todos los recordatorios creados</p>
+                        <!--Final Sección Recordatorios-->
+                    </div>
+                </section>
+                <!--Final Contenido-->
+
+            {% endif %}
 
         {% endblock contenido %}
 

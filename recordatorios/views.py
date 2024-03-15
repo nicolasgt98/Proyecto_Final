@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.template import Template, Context
 from django.http import HttpResponse
 
@@ -6,6 +7,9 @@ from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 from .models import *
 
@@ -74,3 +78,22 @@ def encontrar_tareas(request):
 #___________________________________ Sobre mi
 def sobre_mi(request):
     return render(request, "recordatorios/sobre_mi.html")
+
+
+#___________________________________ Abrir/Cerrar sesión, Autenticación y Registro 
+
+def login_request(request):
+    if request.method == "POST":
+        usuario = request.POST['username']
+        clave = request.POST['password']
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return render(request, "recordatorios/home.html")
+        else:
+            return redirect(reverse_lazy('login'))
+
+    else:
+        miForm = AuthenticationForm()
+
+    return render (request, "recordatorios/login.html", {"form": miForm})

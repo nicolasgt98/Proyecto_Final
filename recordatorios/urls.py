@@ -1,6 +1,8 @@
 from django.urls import path, include
 from .views import *
 
+from django.contrib.auth.views import LogoutView
+
 urlpatterns = [
 
 #_________________________________________ Menú Principal
@@ -34,6 +36,11 @@ urlpatterns = [
     path('encontrar_tareas/', encontrar_tareas, name = "encontrarTareas"),
 
 
-#_________________________________________ Buscar
+#_________________________________________ Sobre Mi
     path('sobre_mi/', sobre_mi, name = "sobreMi"),
+
+
+#__________________________________________Abrir/Cerrar sesión, Autenticación y Registro 
+    path('login/', login_request, name = "login"),
+    path('logout/', LogoutView.as_view(template_name="recordatorios/logout.html"), name = "logout"),
 ] 
