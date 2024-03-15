@@ -42,3 +42,14 @@ Comentarios adicionales
 4. Pendiente corregir la altura de los títulos de los modelos, pues están pegados a toda la margen superior, a diferencia del título en la página principal que si está separado (Si me pueden guiar acá también se los agradezco pues no supe como corregir esto)
 
 5. Las demás funcionalidades como crear, actualizar, eliminar y otras adicionales se incluirán en la próxima versión
+
+
+Usuarios:
+
+Usuario: coderhouse
+Contraseña: coder12345
+
+
+Usuario: prueba2
+Contraseña: nicolas123
+

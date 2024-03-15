@@ -75,10 +75,14 @@
 
                 {% if user.is_authenticated %}
                     <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
-                    <a class="btn btn-primary" href="{% url 'logout' %}">Cerrar Cesión</a>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary logout">Cerrar Sesión</button>
+                    </form>
                     <p>[{{user.username}}]</p>
                 {% else %}
                     <a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a>
+                    <a class="btn btn-primary" href="{% url 'registrar' %}">Registrarse</a>
                 {% endif %}
 
             </div>
