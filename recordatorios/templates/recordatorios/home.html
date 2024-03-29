@@ -70,23 +70,48 @@
         <!--Final Header-->
 
         <!--Inicio Barra de navegación-->
-        <nav class="navbar navbar-light bg-teal static-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-teal static-top">
             <div class="container">
-
+                <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
+        
                 {% if user.is_authenticated %}
-                    <a class="navbar-brand" href="{% url 'home' %}">Inicio</a>
-                    <form action="{% url 'logout' %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary logout">Cerrar Sesión</button>
-                    </form>
-                    <p>[{{user.username}}]</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                        <span class="username">{{ user.username }}</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li class="dropdown-item">
+                            <span class="avatar-wrapper">
+                                <a href="{% url 'agregar_avatar' %}">
+                                    <img src="{{ request.session.avatar }}" class="avatar-img" alt="Avatar">
+                                </a>
+                            </span>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'editar_perfil' %}"><i class="fa fa-user"></i> Editar Perfil</a></li>
+                        <li>                                            
+                            <form action="{% url 'logout' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-light logout"><i class="fa fa-sign-out"></i> Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 {% else %}
-                    <a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a>
-                    <a class="btn btn-primary" href="{% url 'registrar' %}">Registrarse</a>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Ingresar</a></li>
+                        <li><a class="dropdown-item" href="{% url 'registrar' %}"><i class="fa fa-user-plus"></i> Registrarse</a></li>
+                    </ul>
+                </div>
                 {% endif %}
-
             </div>
-        </nav>
+        </nav>        
         <!--Final Barra de navegación-->
 
         {% block contenido %}
@@ -113,41 +138,45 @@
                                         <img src="{%static 'assets/tarea.png' %}" class="card-img-top" alt="Tareas-Imagen">
                                         <div class="card-body">
                                             <h3 class="card-title">Tareas</h3>
-                                            <a href="{% url 'tareas' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                            <a href="{% url 'tarea_list' %}" class="btn btn-custom bg-lightblue">Ir</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
+                                <div class="d-flex justify-content-center">
                                     <div class="card bg-lightblue border-0" style="width: 12rem;">
                                         <img src="{%static 'assets/evento.png' %}" class="card-img-top" alt="Eventos-Imagen">
                                         <div class="card-body">
                                             <h3 class="card-title">Eventos</h3>
-                                            <a href="{% url 'eventos' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                            <a href="{% url 'evento_list' %}" class="btn btn-custom bg-lightblue">Ir</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="d-flex justify-content-center"> <!-- Envuelve la tarjeta dentro de un div con la clase d-flex y justify-content-center -->
+                                <div class="d-flex justify-content-center">
                                     <div class="card bg-lightblue border-0" style="width: 12rem;">
                                         <img src="{%static 'assets/pago.png' %}" class="card-img-top" alt="Pagos-Imagen">
                                         <div class="card-body">
                                             <h3 class="card-title">Pagos</h3>
-                                            <a href="{% url 'pagos' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                            <a href="{% url 'pago_list' %}" class="btn btn-custom bg-lightblue">Ir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card bg-lightblue border-0" style="width: 12rem;">
+                                        <img src="{%static 'assets/contacto.png' %}" class="card-img-top" alt="Pagos-Imagen">
+                                        <div class="card-body">
+                                            <h3 class="card-title">Contactos</h3>
+                                            <a href="{% url 'contacto_list' %}" class="btn btn-custom bg-lightblue">Ir</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container mt-5">
-                        <!--Inicio Sección Recordatorios-->
-                        <h1>Recordatorios</h1>
-                        <h3>Próximamente...</h3>
-                        <p>Acá se podrán visualizar todos los recordatorios creados</p>
-                        <!--Final Sección Recordatorios-->
                     </div>
                 </section>
                 <!--Final Contenido-->
@@ -166,22 +195,9 @@
                         <ul class="list-inline mb-2">
                             <li class="list-inline-item"><a href="{% url 'sobreMi' %}" class="text-dark">Sobre Mi</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!" class="text-dark">Contacto</a></li>
+                            <li class="list-inline-item"><a href="{% url 'contactame' %}" class="text-dark">Contáctame</a></li>
                         </ul>
                         <p class="text-dark small mb-4 mb-lg-0">&copy; Nicolás Garcés Toro. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -189,6 +205,6 @@
         <!--Final Footer-->
 
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

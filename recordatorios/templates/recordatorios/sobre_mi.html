@@ -1,13 +1,25 @@
 {% extends "recordatorios/home.html" %}
+{% load static %}
 
 {% block titulo %}
 <h1 class="mb-5">Sobre Mi</h1>
 {% endblock titulo %}
 
-
 {% block contenido %}
-<h1>Nicolás Garcés Toro</h1>
+<div class="container">
 
-<h2>Próximamente...</h2>
+    <br/>
+    
+    <img src="{% static 'assets/foto.jpg' %}" class="profile-picture mx-auto d-block" alt="Nicolás Garcés Toro">
 
+    <hr>
+
+    <p>Mi nombre es Nicolás Garcés Toro y soy originario de Medellín, Colombia. Actualmente tengo 25 años y soy graduado en Administración de Negocios de la Universidad EAFIT.</p>
+
+    <p>Me encuentro en una etapa de especialización en Gerencia de Proyectos, donde me he enfocado en proyectos relacionados con la tecnología. Me apasiona este campo y creo firmemente en su potencial para generar oportunidades en el futuro. Es por ello que estoy incursionando en el estudio de la analítica de datos y Python, con el objetivo de fortalecer mis habilidades en este ámbito.</p>
+
+    <p>Aparte de mi interés por la tecnología, tengo diversos pasatiempos que disfruto mucho. Uno de ellos es ir al gimnasio y llevar un estilo de vida saludable. También me fascina el mundo de la culinaria; cocinar y descubrir nuevos platos y restaurantes son actividades que me llenan de alegría.</p>
+
+    <p>Además, me considero un entusiasta viajero. Explorar nuevos lugares y sumergirme en diferentes culturas es algo que me llena de energía y enriquece mi vida.</p>
+</div>
 {% endblock contenido %}

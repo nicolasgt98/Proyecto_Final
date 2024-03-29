@@ -1,0 +1,55 @@
+{% extends "recordatorios/home.html" %}
+
+{% block titulo %}
+<h1 class="mb-5">Contactos</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+
+<div class="container mt-5">
+    <div class="row justify-content-between">
+        <div class="col-md-6">
+            <h2>Contactos</h2>
+        </div>
+        <div class="col-md-3 text-end">
+            <a href="{% url 'contacto_crear' %}" class="btn btn-primary"><i class="fa fa-plus"></i> Crear</a>
+            <a href="{% url 'buscarContactos' %}" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Etiqueta</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in contacto_list %}
+            <tr>
+                <td>{{ contacto.id }}</td>
+                <td>{{ contacto.nombre }}</td>
+                <td>{{ contacto.apellido }}</td>
+                <td>{{ contacto.correo }}</td>
+                <td>{{ contacto.telefono }}</td>
+                <td>{{ contacto.etiqueta }}</td>
+                <td>{{ contacto.descripcion }}</td>
+                <td>
+                    <a href="{% url 'contacto_actualizar' contacto.id %}" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                    <a href="{% url 'contacto_eliminar' contacto.id %}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock contenido %}

@@ -4,72 +4,53 @@
 <h1 class="mb-5">Eventos</h1>
 {% endblock titulo %}
 
-
 {% block contenido %}
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th width="200"><h2>Eventos</h2></th>
-            <th>
-                <a
-                href ="{% url 'evento_crear' %}"
-                class="btn btn-primary btn-sm"
-                ><i class ="fa fa-plus fa-lg" title ="Crear"></i>
-                </a>
-            </th>
-            <th>
-                <a
-                href ="{% url 'buscarEventos' %}"
-                class="btn btn-primary btn-sm"
-                ><i class="fa-solid fa-magnifying-glass" title ="Buscar"></i>
-                </a>
-            </th>
-        </tr>   
-</table>
+<div class="container mt-5">
+    <div class="row justify-content-between">
+        <div class="col-md-6">
+            <h2>Eventos</h2>
+        </div>
+        <div class="col-md-3 text-end">
+            <a href="{% url 'evento_crear' %}" class="btn btn-primary"><i class="fa fa-plus"></i> Crear</a>
+            <a href="{% url 'buscarEventos' %}" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</a>
+        </div>
+    </div>
+</div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Lugar</th>
-            <th>Fecha del Evento</th>
-            <th>Recordatorio</th>
-            <th>Etiqueta</th>
-            <th>Descripción</th>
-        </tr>   
-    </thead>
-    <tbody>
-    {% for e in evento_list %}
-        <tr>
-            <td>{{ e.id }}</td>
-            <td>{{ e.nombre }}</td>
-            <td>{{ e.lugar }}</td>
-            <td>{{ e.fecha }}</td>
-            <td>{{ e.recordatorio }}</td>
-            <td>{{ e.etiqueta }}</td>
-            <td>{{ e.descripcion }}</td>
-
-            
-            <td>
-                <a
-                  href="{% url 'evento_actualizar' e.id %}"
-                  class="btn btn-primary"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
-                </a>
-                <a
-                  href="{% url 'evento_eliminar' e.id %}"
-                  class="btn btn-danger"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
-                </a>                
-            </td>   
-
-        </tr>
-    {% endfor%}
-    </tbody>
-</table>
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Lugar</th>
+                <th>Fecha del Evento</th>
+                <th>Recordatorio</th>
+                <th>Etiqueta</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in evento_list %}
+            <tr>
+                <td>{{ evento.id }}</td>
+                <td>{{ evento.nombre }}</td>
+                <td>{{ evento.lugar }}</td>
+                <td>{{ evento.fecha }}</td>
+                <td>{{ evento.recordatorio }}</td>
+                <td>{{ evento.etiqueta }}</td>
+                <td>{{ evento.descripcion }}</td>
+                <td>
+                    <a href="{% url 'evento_actualizar' evento.id %}" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                    <a href="{% url 'evento_eliminar' evento.id %}" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock contenido %}
+
